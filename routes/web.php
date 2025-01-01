@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\FrontendController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [FrontendController::class, 'index']);
-Route::get('/produc-details', [FrontendController::class, 'productDetails']);
-Route::get('/shop', [FrontendController::class, 'shop']);
+Route::get('/', [FrontendController::class, 'index'])->name('base');
+Route::get('/produc-details', [FrontendController::class, 'productDetails'])->name('product.details');
+Route::get('/shop', [FrontendController::class, 'shop'])->name('shop');
 Route::get('/return-process', [FrontendController::class, 'returnProcess']);
 Route::get('/category-products', [FrontendController::class, 'categoryProducts']);
 Route::get('/subcategory-products', [FrontendController::class, 'subcategoryProducts']);
@@ -21,3 +22,7 @@ Route::get('/refund-policy', [FrontendController::class, 'refundPolicy']);
 Route::get('/payment-policy', [FrontendController::class, 'paymentPolicy']);
 Route::get('/about-us', [FrontendController::class, 'aboutUs']);
 Route::get('/contact-us', [FrontendController::class, 'contactUs']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
