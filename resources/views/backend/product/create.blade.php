@@ -59,6 +59,17 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    <div class="form-group" id="color_fields">
+                                        <label for="name">Product Color (Optional)</label>
+                                        <input type="text" class="form-control" name="color[]" id="color" placeholder="Enter product color">
+                                    </div>
+                                    <button type="button" class="btn btn-primary" id="add_color">Add More</button>
+
+                                    <div class="form-group" id="size_fields">
+                                        <label for="name">Product Size (Optional)</label>
+                                        <input type="text" class="form-control" name="size[]" id="size" placeholder="Enter product size">
+                                    </div>
+                                    <button type="button" class="btn btn-primary" id="add_size">Add More</button>
                                     <div class="form-group">
                                         <label for="name">Product quantity*</label>
                                         <input type="number" class="form-control" name="qty" id="qty" placeholder="Enter product quantity*" required>
@@ -99,6 +110,19 @@
                                         <div class="input-group">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" name="image" id="image" accept="image/*" required>
+                                                <label class="custom-file-label" for="image">Choose file</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text">Upload</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">Gallery Image*</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" name="galleryImage[]" multiple id="galleryImage" accept="image/*" required>
                                                 <label class="custom-file-label" for="image">Choose file</label>
                                             </div>
                                             <div class="input-group-append">
@@ -152,6 +176,26 @@
         mode: "htmlmixed",
         theme: "monokai"
       });
+    })
+  </script>
+
+  {{-- Add color --}}
+
+  <script>
+    $(document).ready(function(){
+        $("#add_color").click(function(){
+            $("#color_fields").append('<input type="text" class="form-control" name="color[]" id="color" placeholder="Enter product color">')
+        })
+    })
+  </script>
+
+  {{-- Add size --}}
+
+  <script>
+    $(document).ready(function(){
+        $("#add_size").click(function(){
+            $("#size_fields").append('<input type="text" class="form-control" name="size[]" id="size" placeholder="Enter product size">')
+        })
     })
   </script>
 @endpush
