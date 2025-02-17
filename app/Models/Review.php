@@ -10,4 +10,14 @@ class Review extends Model
     use HasFactory;
 
     protected $guarded = [];
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
 }
+
+
+//Review <=> Product
+
+//Review belongsTo Product
