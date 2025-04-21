@@ -103,6 +103,21 @@ class FrontendController extends Controller
         return view ('terms-conditions');
     }
 
+    public function refundPolicy ()
+    {
+        return view ('refund-policy');
+    }
+
+    public function paymentPolicy ()
+    {
+        return view ('payment-policy');
+    }
+
+    public function aboutUs ()
+    {
+        return view ('about-us');
+    }
+
     public function contactUs ()
     {
         return view ('contact-us');
