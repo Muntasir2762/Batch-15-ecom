@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class OrderController extends Controller
 {
@@ -39,6 +40,50 @@ class OrderController extends Controller
     {
         $order = Order::find($id);
         $order->status = $status;
+
+        if($status == "delivered"){
+            if($order->courier_name == "steadfast"){
+
+                //API Endpint...
+                $endPoint = "https://portal.packzy.com/api/v1/create_order";
+
+                //Auth Parametres...
+                $apiKey = "sl4xb4fhx4xefuodes3gjoh6uuktl3vl";
+                $secretKey = "lwp49erccevuglcxzjlfb0hk";
+                $contentType = "application/json";
+
+                //The Body Parametres..
+                $invoiceId = $order->invoiceId;
+                $customerName = $order->c_name;
+                $customerPhone = $order->c_phone;
+                $customerAddress = $order->address;
+                $oredrPrice = $order->price;
+
+                //The Header...
+                $header = [
+                    'Api-Key' => $apiKey,
+                    'Secret-Key' => $secretKey,
+                    'Content-Type' => $contentType,
+                ];
+
+                //The Payload...
+                $payload = [
+                    'invoice' => $invoiceId,
+                    'recipient_name' => $customerName,
+                    'recipient_phone' => $customerPhone,
+                    'recipient_address' => $customerAddress,
+                    'cod_amount' => $oredrPrice,
+                ];
+
+                $response = Http::withHeaders($header)->post($endPoint, $payload);
+                
+                $responseData = $response->json();
+
+            }
+            else{
+                return "Select Courier";
+            }
+        }
 
         $order->save();
         return redirect()->back();
